@@ -2,7 +2,7 @@
 FROM php:8.0-apache
 
 # Habilitamos la extensión cURL
-RUN docker-php-ext-enable curl
+RUN apk --no-cache add curl
 
 # Copiamos nuestro script PHP al contenedor
 COPY src/ /var/www/html/
