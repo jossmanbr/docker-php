@@ -8,7 +8,7 @@ RUN apk --no-cache add curl
 COPY src/ /var/www/html/
 
 # Exponemos el puerto 80 para el servidor web
-EXPOSE 80
+EXPOSE 8090
 
 # Ejecutamos PHP en modo servidor
-CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www/html/"]
+CMD ["php", "-S", "0.0.0.0:8090", "-t", "/var/www/html/"]
