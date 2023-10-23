@@ -1,14 +1,14 @@
-# Usamos la imagen oficial de PHP con Alpine
-FROM php:8.0-fpm-alpine
+# Usamos la imagen oficial de PHP con Apache
+FROM php:8.0-apache
 
-# Instalamos cURL
-RUN apk --no-cache add curl
+# Habilitamos la extensión cURL
+RUN docker-php-ext-enable curl
 
 # Copiamos nuestro script PHP al contenedor
 COPY src/ /var/www/html/
 
 # Exponemos el puerto 80 para el servidor web
-EXPOSE 10000
+EXPOSE 80
 
-# Ejecutamos PHP en modo servidor
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "/var/www/html/"]
+# Ejecutamos Apache en primer plano
+CMD ["apache2-foreground"]
