@@ -11,4 +11,4 @@ COPY src/ /var/www/html/
 EXPOSE 10000
 
 # Ejecutamos PHP en modo servidor
-CMD ["php", "-S", "0.0.0.0", "-t", "/var/www/html/"]
+CMD ["php", "-S", "0.0.0.0:10000", "-t", "/var/www/html/"]
