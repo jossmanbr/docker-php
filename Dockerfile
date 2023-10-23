@@ -1,11 +1,8 @@
-# Usamos la imagen oficial de Ubuntu como base
-FROM ubuntu:latest
+# Usamos la imagen oficial de PHP con Apache
+FROM php:8.0-apache
 
-# Actualizamos los paquetes del sistema
-RUN apt-get update
-
-# Instalamos PHP y cURL
-RUN apt-get install -y php php-curl
+# Habilitamos la extensión cURL
+RUN docker-php-ext-enable curl
 
 # Copiamos nuestro script PHP al contenedor
 COPY src/ /var/www/html/
@@ -13,7 +10,8 @@ COPY src/ /var/www/html/
 # Exponemos el puerto 80 para el servidor web
 EXPOSE 80
 
-# Ejecutamos PHP en modo servidor
-CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www/html/"]
+# Ejecutamos Apache en el fondo
+CMD ["apache2-foreground"]
+
 
 
