@@ -1,14 +1,17 @@
-# Usamos la imagen oficial de PHP con Apache
-FROM php:8.0-apache
+# Utiliza una imagen de PHP como base
+FROM php:7.4-apache
 
-# Habilitamos la extensión cURL
-RUN apk --no-cache add curl
+# Instala Curl y otros paquetes necesarios
+RUN apt-get update && apt-get install -y curl libcurl4-openssl-dev
 
-# Copiamos nuestro script PHP al contenedor
+# Habilita el módulo Curl en PHP
+RUN docker-php-ext-install curl
+
+# Copia tus archivos PHP al directorio web de Apache
 COPY src/ /var/www/html/
 
-# Exponemos el puerto 80 para el servidor web
+# Expone el puerto 80
 EXPOSE 80
 
-# Ejecutamos Apache en primer plano
+# Comando para iniciar Apache al ejecutar el contenedor
 CMD ["apache2-foreground"]
